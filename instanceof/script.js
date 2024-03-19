@@ -22,6 +22,7 @@ Com a palavra-chave instanceof podemos verificar se um objeto
 (class).
 */
 // console.log(livro instanceof Product)
+// extends e quando uma classe herda caracteristicas de outra classe
 class Livro extends Product {
     constructor(nome, autor) {
         super(nome);
@@ -52,3 +53,4 @@ if (produto instanceof Livro) {
 if (produto instanceof Jogo) {
     console.log(produto.jogadores);
 }
+// O instanceof so funcionara com class, e nao com a interface ou type
