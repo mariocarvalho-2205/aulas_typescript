@@ -1,7 +1,16 @@
 "use strict";
 // Generic é uma forma dinamica de passar o tipo do argumento da função, 
 // classe ou interface
-var _a;
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var _a, _b;
 function retorno(a) {
     return a;
 }
@@ -27,5 +36,49 @@ function notNull(arg) {
     else
         return null;
 }
-console.log((_a = notNull("Mario")) === null || _a === void 0 ? void 0 : _a.toLowerCase());
+console.log(notNull("Mario"));
 console.log(notNull(200));
+console.log((_a = notNull(200)) === null || _a === void 0 ? void 0 : _a.toString());
+// verificando o tipo de dado na função
+// para ser explicito no retorno, é preciso passar um objeto 
+function tipoDado(a) {
+    const resultado = {
+        dado: a,
+        tipo: typeof a
+    };
+    console.log(resultado);
+    return resultado;
+}
+tipoDado("Teste");
+// para selecionar o tipo de um elemento via generic, utilizamos o extends
+// function extractLink<T extends HTMLElement> (el: T ) {
+//     return {
+//         texto: el.innerText,
+//         el
+//     } 
+// }
+// const link = document.querySelector('a')
+// if (link) {
+//     console.log(extractLink(link).el.href)
+// }
+function $(selector) {
+    return document.querySelector(selector);
+}
+// para utilizar os metodos do elemento e necessario passar o tipo de elemento no generic
+const link = (_b = $("a")) === null || _b === void 0 ? void 0 : _b.href;
+console.log(link);
+const url = "https://api.origamid.dev/json/notebook.json";
+function getData(url) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield fetch(url);
+        return yield res.json();
+    });
+}
+// ou pode ser passado como extends na função getData
+function handleData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const notebook = yield getData(url);
+        console.log(notebook);
+    });
+}
+handleData();
