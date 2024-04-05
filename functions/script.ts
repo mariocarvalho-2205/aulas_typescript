@@ -52,9 +52,65 @@ reduzindo ate a opacidade do codigo
 que segue apos a função
 */
 
-function abortar (mensagem: string): never {
-    throw new Error (mensagem)
+// function abortar (mensagem: string): never {
+//     throw new Error (mensagem)
+// }
+
+// abortar('um erro ocorreu')
+// console.log('tente novamente')
+
+// =-=-=-=-=-=-=-=-=-=-= Metodos
+/*
+Métodos nativos são definidos utilizando generics, 
+assim podemos indicar durante a execução qual 
+será o tipo esperado.
+*/
+
+interface Quadrado {
+    lado: number;
+    perimetro( lado: number ): number
 }
 
-abortar('um erro ocorreu')
-console.log('tente novamente')
+function calcularQuadrado (forma: Quadrado) {
+    forma.perimetro(3)
+}
+/**
+ * 
+ * Overload
+Existem funções que retornam diferentes dados dependendo do argumento.
+
+Podemos declarar a interface dessas funções utilizando function overload. Basta declarar a interface antes da definição da mesma, utilizando o mesmo nome.
+
+O Overload deve ser compatível com a função original.
+
+sintaxe
+
+function normalizar(valor: string):string;
+function normalizar(valor: string[]):string[];
+function normalizar (valor: string | string[]): string | string[] {
+    if ( typeof valor === "string") {
+        return valor.trim().toUpperCase()
+    } else {
+        return valor.map((item) => item.trim().toUpperCase())
+    }
+}
+
+
+
+ */
+
+// function normalizar (valor: string) {
+//     return valor.trim().toUpperCase()
+// }
+function normalizar (valor: string[]):string[]
+function normalizar(valor: string):string
+function normalizar (valor: string | string[]): string | string[] {
+    if ( typeof valor === "string") {
+        return valor.trim().toUpperCase()
+    } else {
+        return valor.map((item) => item.trim().toUpperCase())
+    }
+}
+
+console.log(normalizar(" ProdutO Assim"))
+console.log(normalizar([" banana ", "Uva"]))

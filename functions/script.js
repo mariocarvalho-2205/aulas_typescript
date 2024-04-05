@@ -27,16 +27,16 @@ function isString(value) {
 }
 console.log(isString("teste"));
 console.log(isString(10));
-/*
-Never
-O never é utilizado em casos onde a
-função gera um erro ou termina a aplicação.
-Ou seja, para toda a aplicação
-reduzindo ate a opacidade do codigo
-que segue apos a função
-*/
-function abortar(mensagem) {
-    throw new Error(mensagem);
+function calcularQuadrado(forma) {
+    forma.perimetro(3);
 }
-abortar('um erro ocorreu');
-console.log('tente novamente');
+function normalizar(valor) {
+    if (typeof valor === "string") {
+        return valor.trim().toUpperCase();
+    }
+    else {
+        return valor.map((item) => item.trim().toUpperCase());
+    }
+}
+console.log(normalizar(" ProdutO Assim"));
+console.log(normalizar([" banana ", "Uva"]));
