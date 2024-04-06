@@ -79,14 +79,26 @@ function handleProduto(data) {
     }
 }
 fetchProduto();
-function fetchCursos() {
+/*
+User Type Guard
+
+Array
+Uma array não pode ser verificada com
+o typeof pois a mesma é um object.
+Podemos verificar se o dado é instanceof
+Array ou podemos usar a função Array.isArray().
+*/
+// interface Cursos2 {
+//   nome: string;
+// }
+function fetchCursos2() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch("https://api.origamid.dev/json/cursos.json");
         const data = yield response.json();
         handleCursos(data);
     });
 }
-fetchCursos();
+fetchCursos2();
 // o type guard so passa a acessar os atributos quando e feito o type guard
 function handleCursos(data) {
     console.log(data);

@@ -90,17 +90,17 @@ Podemos verificar se o dado é instanceof
 Array ou podemos usar a função Array.isArray().
 */
 
-interface Cursos {
-  nome: string;
-}
+// interface Cursos2 {
+//   nome: string;
+// }
 
-async function fetchCursos() {
+async function fetchCursos2() {
   const response = await fetch("https://api.origamid.dev/json/cursos.json");
   const data = await response.json();
   handleCursos(data);
 }
 
-fetchCursos();
+fetchCursos2();
 
 // o type guard so passa a acessar os atributos quando e feito o type guard
 
