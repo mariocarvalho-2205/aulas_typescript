@@ -29,7 +29,7 @@ ou seja ele deixa passar
  */
 function typeGuard(value) {
     // return value.toLowerCase() // para a funçao
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
         return value.toLowerCase();
     }
     if (typeof value === "number") {
@@ -39,7 +39,7 @@ function typeGuard(value) {
         return value.innerText;
     }
 }
-console.log(typeGuard('ss'));
+console.log(typeGuard("ss"));
 console.log(typeGuard(200));
 console.log(typeGuard(document.body));
 /**
@@ -49,12 +49,12 @@ propriedade com o mesmo nome da string comparada
 "propriedade" in obj.
  */
 const obj = {
-    nome: "Mario"
+    nome: "Mario",
 };
-if ('nome' in obj) {
+if ("nome" in obj) {
     console.log("sim");
 }
-if ('preço' in obj) {
+if ("preço" in obj) {
     console.log("sim");
 }
 function fetchProduto() {
@@ -66,7 +66,7 @@ function fetchProduto() {
 }
 function handleProduto(data) {
     // o type guard faz a verificação para ver se realmente existe o dado passado
-    if ('preco' in data) {
+    if ("preco" in data) {
         document.body.innerHTML += `
         <p>Nome: ${data.nome}</p>
         <p>Preço R$ ${data.preco + 100}</p>
@@ -79,3 +79,69 @@ function handleProduto(data) {
     }
 }
 fetchProduto();
+function fetchCursos() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch("https://api.origamid.dev/json/cursos.json");
+        const data = yield response.json();
+        handleCursos(data);
+    });
+}
+fetchCursos();
+// o type guard so passa a acessar os atributos quando e feito o type guard
+function handleCursos(data) {
+    console.log(data);
+    if (data instanceof Array) {
+        console.log("É uma instancia de Array");
+    }
+    if (Array.isArray(data)) {
+        console.log("É Array");
+    }
+}
+/*
+Type Predicate
+TypeScript não executa JavaScript
+
+Sabemos já que o TS não executa o
+JS durante a checagem dos tipos.
+Se isso ocorre, então como a
+função isArray consegue ser usada
+ como Type Guard?
+
+Com o Type Predicate :arg is type,
+podemos indicar qual o tipo de argumento
+uma função booleana (que retorna boolean)
+recebeu para ser verdadeira.
+
+! é preciso fazer a type guard com seguraça para não retornar erro no site
+*/
+function isString(value) {
+    return typeof value === "string";
+}
+function handleData(data) {
+    if (isString(data)) {
+        console.log(data.toUpperCase() + " o codigo esta depois da async function");
+    }
+}
+handleData("mario");
+handleData(200);
+function fetchProduto2() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch('https://api.origamid.dev/json/notebook.json');
+        const data = yield response.json();
+        handleProduto2(data);
+    });
+}
+fetchProduto2();
+function isProduto2(value) {
+    if (value && typeof value === 'object' && 'nome' in value && 'preco' in value) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function handleProduto2(data) {
+    if (isProduto2(data)) {
+        console.log(data);
+    }
+}
